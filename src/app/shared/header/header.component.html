@@ -1,0 +1,15 @@
+<mat-toolbar color="primary">
+  <span>Conversation Analysis App with Symbl.ai</span>
+  <span class="example-spacer"></span>
+  <button
+  mat-icon-button
+  class="example-icon"
+  aria-label="Example icon-button with menu icon"
+  >
+  <mat-icon (click)="logout()">logout</mat-icon>
+</button>
+</mat-toolbar>
+
+<div *ngIf="loaderService.isLoading | async" class="loader-container">
+  <mat-spinner style="top: 50%; left: 50%;" mode="indeterminate"></mat-spinner>
+</div>

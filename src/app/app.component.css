@@ -1,0 +1,20 @@
+.file-input {
+    display: none;
+  }
+
+.card-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.button-container button{
+  margin: 10px
+}
+.example-card {
+  max-width: 400px;
+  margin-top: 10px;
+}
+.summary{
+  max-width: 700px;
+}

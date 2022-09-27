@@ -1,0 +1,173 @@
+<app-header></app-header>
+<div class="card-container">
+  <div class="card-container">
+    <!-- <input
+      type="file"
+      class="file-input"
+      name="file"
+      (change)="onFileSelected($event)"
+      #fileUpload
+    /> -->
+    <!-- <div class="file-upload">
+      {{ fileName || "No file uploaded yet." }}
+
+      <button
+        mat-mini-fab
+        color="primary"
+        class="upload-btn"
+        (click)="fileUpload.click()"
+      >
+        <mat-icon>attach_file</mat-icon>
+      </button>
+    </div> -->
+    <div class="card-container">
+      <form class="url-container">
+        <mat-form-field>
+          <mat-placeholder style="margin: 20px">https://</mat-placeholder>
+          <input matInput disabled appear type="url" [value]="videoData.url" />
+          <button
+            mat-button
+            matPrefix
+            mat-stroked-button
+            color="primary"
+            aria-label="url"
+            (click)="getUrl()"
+          >
+            <mat-icon>link</mat-icon>
+            Get public url
+          </button>
+        </mat-form-field>
+      </form>
+      <!-- <div class="container">
+        <button mat-raised-button color="primary" (click)="getUrl()">
+          Get public url
+        </button>
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Video public url here...</mat-label>
+          <input matInput disabled [value]="videoUrl" />
+        </mat-form-field>
+      </div> -->
+      <div>
+        <button mat-raised-button color="primary" (click)="processVideo()">
+          Process video
+        </button>
+        <button mat-raised-button color="accent" (click)="getAnalysis()">
+          Get analysis
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="data-container">
+    <mat-card class="summary">
+      <div class="chip-list">
+        <h4>Topics:</h4>
+        <p *ngIf="topics.length === 0"> None</p>
+        <ng-container *ngIf="topics">
+          <mat-chip-list *ngFor="let topic of topics">
+            <mat-chip>{{ topic.text }}</mat-chip>
+          </mat-chip-list>
+        </ng-container>
+      </div>
+
+      <mat-card-title>Summary</mat-card-title>
+      <!-- <h4>Topics:</h4>
+        <mat-chip-list class="chip-list" *ngFor="let topic of topics">
+          <mat-chip *ngIf="topic">{{ topic.text }}</mat-chip>
+        </mat-chip-list> -->
+      <mat-card-content>
+        <ng-container></ng-container>
+        <p *ngIf="!summary"> None</p>
+        <p *ngIf="summary">{{ summary }}</p>
+      </mat-card-content>
+      <!-- <mat-card-actions>
+          <button mat-raised-button color="accent" (click)="getSummary()">
+            Get Summary
+          </button>
+          <button mat-raised-button color="accent" (click)="getTopics()">
+            Display Topics
+          </button>
+        </mat-card-actions> -->
+    </mat-card>
+
+    <div class="analytics-container">
+      <mat-card class="example-card">
+        <mat-card-title>Conversation Transcript</mat-card-title>
+        <p *ngIf="messages.length === 0">None</p>
+        <mat-card-content *ngIf="messages">
+          <ng-container *ngFor="let message of messages">
+            <mat-card-subtitle
+              >{{ message.startTime }} -
+              {{ message.endTime }}</mat-card-subtitle
+            >
+            <p>{{ message.text }}</p>
+            <p>Duration: {{ message.duration }}</p>
+            <p *ngIf="message.sentiment">
+              Sentiment: {{ message.sentiment.suggested }}
+            </p>
+          </ng-container>
+        </mat-card-content>
+        <!-- <mat-card-actions>
+            <button mat-raised-button color="accent" (click)="getMessages()">
+              Get Messages
+            </button>
+          </mat-card-actions> -->
+      </mat-card>
+
+      <mat-card class="example-card">
+        <mat-card-title>Video Analytics</mat-card-title>
+        <mat-card-content>
+          <mat-card>
+            <h4>Members:</h4>
+            <p *ngIf="members.length === 0">None</p>
+            <ng-container *ngIf="members">
+              <ng-container *ngFor="let member of members">
+                <mat-card-subtitle>- Name: {{ member.name }}</mat-card-subtitle>
+                <p>Pace: wpm:{{ member.pace.wpm }}</p>
+                <p>
+                  Talktime: {{ member.talkTime.seconds }} sec |
+                  {{ member.talkTime.percentage }} %
+                </p>
+                <p>
+                  ListenTime: {{ member.listenTime.seconds }} sec |
+                  {{ member.listenTime.percentage }} %
+                </p>
+              </ng-container>
+            </ng-container>
+          </mat-card>
+
+          <mat-card>
+            <h4>Video Metrics:</h4>
+            <ng-container *ngFor="let metric of metrics">
+              <mat-card-subtitle>- Type: {{ metric.type }}</mat-card-subtitle>
+              <p>Percentage: {{ metric.percent }} %</p>
+              <p>Duration: {{ metric.seconds }} sec</p>
+            </ng-container>
+          </mat-card>
+
+          <mat-card class="analytics-card">
+            <mat-card-title>Questions:</mat-card-title>
+            <mat-card-content *ngIf="!questions">
+              <p> None</p>
+            </mat-card-content>
+
+            <mat-card-content *ngIf="questions">
+              <ng-container *ngFor="let ques of questions">
+                <mat-card>
+                  <mat-card-content>
+                    <p>- {{ ques.text }}</p>
+                  </mat-card-content>
+                </mat-card>
+              </ng-container>
+            </mat-card-content>
+          </mat-card>
+        </mat-card-content>
+        <!-- <mat-card-actions>
+            <button mat-raised-button color="accent" (click)="getAnalytics()">
+              Get Analytics
+            </button>
+          </mat-card-actions> -->
+      </mat-card>
+    </div>
+  </div>
+</div>

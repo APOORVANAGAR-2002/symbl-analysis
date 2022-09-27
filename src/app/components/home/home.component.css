@@ -1,0 +1,97 @@
+.container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: indigo;
+  background-size: cover;
+  overflow-x: hidden;
+}
+.card-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  margin: 10px;
+}
+input[type="file"] {
+  display: none;
+}
+.form-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+
+}
+.custom-file-upload {
+  border: 1px solid #ccc;
+  display: flex;
+  align-items: center;
+  padding: 6px 12px;
+  cursor: pointer;
+  margin: 10px;
+}
+
+
+h1, p{
+  color: white;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+.box-container{
+  display: flex;
+}
+.btn{
+  display: flex;
+  margin: 10px;
+  font-size: large;
+  padding: 10px;
+}
+.file-input {
+    display: none;
+  }
+
+.card-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  margin: 10px;
+}
+.data-container{
+    display: flex;
+    width: 100vw;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.button-container button{
+  margin: 10px
+}
+.example-card {
+  max-width: 400px;
+  margin-top: 10px;
+  margin: 10px;
+}
+.example-card{
+  min-width: 300px;
+}
+.summary{
+  min-width: 1000px;
+  padding: 40px;
+}
+.analytics-container{
+    display: flex;
+    margin: 10px;
+}
+.chip-list{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.chip-list mat-chip-list{
+  margin: 4px;
+}
