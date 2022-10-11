@@ -1,13 +1,14 @@
-<mat-toolbar color="primary">
-  <span>Conversation Analysis App with Symbl.ai</span>
+<mat-toolbar class="navbar">
+  <span class="example-spacer">ANALYTICS</span>
+  <ul class="navbar-items">
+    <li><a href="#">About Us</a></li>
+    <li><a href="#">My File</a></li>
+  </ul>
   <span class="example-spacer"></span>
-  <button
-  mat-icon-button
-  class="example-icon"
-  aria-label="Example icon-button with menu icon"
-  >
-  <mat-icon (click)="logout()">logout</mat-icon>
-</button>
+  <button mat-raised-button (click)="logout()" class="example-icon" aria-label="Example icon-button with menu icon">
+    <!-- <mat-icon ></mat-icon> -->
+    logout
+  </button>
 </mat-toolbar>
 
 <div *ngIf="loaderService.isLoading | async" class="loader-container">

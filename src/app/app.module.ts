@@ -15,7 +15,6 @@ import { MatChipsModule } from '@angular/material/chips';
 import { HomeComponent } from './components/home/home.component';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { VideoComponent } from './components/video/video.component';
-import { AudioComponent } from './components/audio/audio.component';
 import { TextComponent } from './components/text/text.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { HeaderComponent } from './shared/header/header.component';
@@ -34,7 +33,6 @@ import { RouterModule } from '@angular/router';
     LoginComponent,
     HomeComponent,
     VideoComponent,
-    AudioComponent,
     TextComponent,
     HeaderComponent,
     SignupComponent,

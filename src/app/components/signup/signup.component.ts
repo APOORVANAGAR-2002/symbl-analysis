@@ -28,8 +28,8 @@ export class SignupComponent implements OnInit {
     this.authService.signUp(this.userData).subscribe((res) => {
       var response = JSON.parse(JSON.stringify(res));
       console.log(response);
-      if (response.error === null) {
-        this.toastr.error(response.error.message);
+      if (!response) {
+        this.toastr.error('An error occurred!');
       } else {
         this.toastr.success('Signed up successfully!');
         this.router.navigate(['login']);

@@ -23,18 +23,11 @@
     <div class="card-container">
       <form class="url-container">
         <mat-form-field>
-          <mat-placeholder style="margin: 20px">https://</mat-placeholder>
-          <input matInput disabled appear type="url" [value]="videoData.url" />
-          <button
-            mat-button
-            matPrefix
-            mat-stroked-button
-            color="primary"
-            aria-label="url"
-            (click)="getUrl()"
-          >
+          <!-- <mat-placeholder style="margin: 20px">https://</mat-placeholder> -->
+          <input matInput disabled appear class="input" type="url" [value]="videoData.url" />
+          <button mat-button matPrefix mat-stroked-button color="primary" aria-label="url">
             <mat-icon>link</mat-icon>
-            Get public url
+            Public url:
           </button>
         </mat-form-field>
       </form>
@@ -96,10 +89,8 @@
         <p *ngIf="messages.length === 0">None</p>
         <mat-card-content *ngIf="messages">
           <ng-container *ngFor="let message of messages">
-            <mat-card-subtitle
-              >{{ message.startTime }} -
-              {{ message.endTime }}</mat-card-subtitle
-            >
+            <mat-card-subtitle>{{ message.startTime }} -
+              {{ message.endTime }}</mat-card-subtitle>
             <p>{{ message.text }}</p>
             <p>Duration: {{ message.duration }}</p>
             <p *ngIf="message.sentiment">

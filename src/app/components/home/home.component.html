@@ -1,34 +1,67 @@
 <app-header></app-header>
 <div class="container">
+  <div class="landing-meta">
+    <h1>
+      <span style="font-size: 2rem; font-family: Arial, Helvetica, sans-serif;"> GET/ </span>
+      Analysis
+      <br>
+      <span class="landing-meta-subtitle"> One stop platform for your video analytics</span>
+    </h1>
+  </div>
+  <div class="landing-image">
+    <img src="../../../assets/cloud-data.jpg" width="500" alt="file-upload">
+  </div>
+</div>
+<div class="upload-container">
+  <div class="upload-header"
+    style="display: flex; align-items: center; padding: 20px; margin-left: 20px; justify-content:space-between ; width: 20%;">
+    <span style="display: flex; align-items: center; margin-left: 40px;">
+      <mat-icon>add_circle_outline</mat-icon>
+      <h3>AddFiles/</h3>
+    </span>
+    <!-- <button mat-raised-button color="primary" (click)="getToken()">GetToken</button> -->
+    <button (click)="postForm()" mat-raised-button *ngIf="file">
+      Upload
+    </button>
+    <button (click)="postForm()" disabled class="disabled" mat-raised-button *ngIf="!file">
+      Upload
+    </button>
+  </div>
+  <div class="card-container">
+    <h1 style="color: #171922; font-family: Arial, Helvetica, sans-serif; text-align: center;">
+      Upload your video here
+      <br>
+      <span style="font-family: Arial, Helvetica, sans-serif; font-weight: 600; color: #8d92a1; font-size: 1.2rem;">mp4
+        files are
+        allowed</span>
+    </h1>
+    <form [formGroup]="form" class="form-container">
+      <div>
+        <label for="file-upload" class="custom-file-upload">
+          <img src="https://static.thenounproject.com/png/767526-200.png" width="100" alt="upload image">
+          <span style="font-weight: 600;">Browse to choose a file</span>
+          <!-- <mat-icon>add_circle</mat-icon>Select file: -->
+          <!-- <span style="font-weight: 600; margin-left: 10px">{{
+            fileName
+            }}</span> -->
+        </label>
+        <input id="file-upload" mat-raised-button type="file" formControlName="file" (change)="onFileChange($event)" />
+      </div>
+    </form>
+    <div class="file-view" *ngIf="fileName.length !== 0">
+      <img src="https://static.thenounproject.com/png/115842-200.png" width="60" alt="mp4 file icon">
+      <h3>{{fileName}}</h3>
+    </div>
+  </div>
+
+</div>
+
+<div class="container">
   <h1>Welcome to the website!</h1>
   <p>Choose from any of the below features</p>
   <div class="box-container">
-    <div class="card-container">
-      <h1>Upload your file here</h1>
-      <form [formGroup]="form" class="form-container">
-        <div>
-          <label for="file-upload" class="custom-file-upload">
-            <mat-icon>add_circle</mat-icon>Select file:
-            <span style="font-weight: 600; margin-left: 10px">{{
-              fileName
-            }}</span>
-          </label>
-          <input
-            id="file-upload"
-            mat-raised-button
-            type="file"
-            formControlName="file"
-            (change)="onFileChange($event)"
-          />
-        </div>
-        <button (click)="postForm()" mat-raised-button color="primary">
-          <mat-icon>upload</mat-icon>
-          Upload
-        </button>
-      </form>
-    </div>
 
-    
+
 
     <!-- <button class="btn" mat-raised-button color="primary" (click)="routeTo('video')">Video Analysis</button>
     <button class="btn" mat-raised-button color="accent" (click)="routeTo('audio')">Audio Analysis</button>
@@ -95,7 +128,6 @@
         </button>
       </mat-card-actions> -->
 <!-- </mat-card> -->
-
 <!-- <div class="analytics-container">
       <mat-card class="example-card">
         <mat-card-title>Conversation Transcript</mat-card-title>

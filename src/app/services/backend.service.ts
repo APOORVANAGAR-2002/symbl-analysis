@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class BackendService {
-  URL = 'http://localhost:8080';
+  URL = 'http://127.0.0.1:8000';
   options = {
     method: 'POST',
     headers: {
@@ -19,7 +19,7 @@ export class BackendService {
 
   // headers = new HttpHeaders()
   // .set('accessToken', 'localStorage.getItem('accessToken')')
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   attachVideo(data: any) {
     this.options.body = data;
@@ -29,9 +29,10 @@ export class BackendService {
     // this.http.post(this.URL, data);
   }
 
+
   submitVideo(formData: any) {
     console.log(formData);
-    return this.http.post(`${this.URL}/fileupload`, formData);
+    return this.http.post(`${this.URL}/upload`, formData);
     //   .subscribe(res => {
     //   console.log("Form data uploaded(backend service: ",res);
     //   let filename = JSON.parse(JSON.stringify(res)).file.originalname;
@@ -72,8 +73,13 @@ export class BackendService {
     //     .catch((err) => console.error(err));
   }
 
-  getPublicURL(filename: string) {
-    return this.http.get(`${this.URL}/getFile/${filename}`);
+  getPublicURL(fileid: string) {
+    return this.http.get(`${this.URL}/publicUrl/${fileid}`);
+  }
+
+
+  getAccessToken() {
+    return this.http.get(`${this.URL}/get_access_token`);
   }
 
   processVideo(videoData: { id: string; url: string }) {
@@ -85,62 +91,102 @@ export class BackendService {
     console.log(localStorage.getItem('accessToken'));
     return this.http.post(
       `${this.URL}/processVideo/${videoData.id}`,
-      videoData,
-      {
-        headers: { accessToken: `${localStorage.getItem('accessToken')}` },
+      videoData.id, {
+      params: {
+        accessToken: `${localStorage.getItem('accessToken')}`
       }
+    }
+      // {
+      //   headers: { accessToken: `${localStorage.getItem('accessToken')}` },
+      // }
     );
   }
 
   checkStatus(data: { id: string; jobId: string }) {
     return this.http.get(`${this.URL}/checkstatus/${data.id}`, {
-      headers: { jobId: `${data.jobId}` },
-    });
+      params: {
+        accessToken: `${localStorage.getItem('accessToken')}`
+      }
+    }
+      // , {
+      //   headers: { jobId: `${data.jobId}` },
+      // }
+    );
     // console.log("Res in backend service", res);
   }
 
   getMessages(data: { id: string; conversationId: string }) {
-    return this.http.get(`${this.URL}/getmessage/${data.id}`, {
-      headers: {
-        conversationId: `${data.conversationId}`,
-        accessToken: `${localStorage.getItem('accessToken')}`,
-      },
-    });
+    return this.http.get(`${this.URL}/messages/${data.id}`, {
+      params: {
+        accessToken: `${localStorage.getItem('accessToken')}`
+      }
+    }
+      // , {
+      //   headers: {
+      //     conversationId: `${data.conversationId}`,
+      //     accessToken: `${localStorage.getItem('accessToken')}`,
+      //   },
+      // }
+    );
   }
 
   getSummary(data: { id: string; conversationId: string }) {
-    return this.http.get(`${this.URL}/getsummary/${data.id}`, {
-      headers: {
-        conversationId: `${data.conversationId}`,
-        accessToken: `${localStorage.getItem('accessToken')}`,
-      },
-    });
+    return this.http.get(`${this.URL}/summary/${data.id}`, {
+      params: {
+        accessToken: `${localStorage.getItem('accessToken')}`
+      }
+    }
+      // , {
+      //   headers: {
+      //     conversationId: `${data.conversationId}`,
+      //     accessToken: `${localStorage.getItem('accessToken')}`,
+      //   },
+      // }
+    );
   }
 
   getQuestions(data: { id: string; conversationId: string }) {
-    return this.http.get(`${this.URL}/getquestions/${data.id}`, {
-      headers: {
-        conversationId: `${data.conversationId}`,
-        accessToken: `${localStorage.getItem('accessToken')}`,
-      },
-    });
+    return this.http.get(`${this.URL}/question/${data.id}`, {
+      params: {
+        accessToken: `${localStorage.getItem('accessToken')}`
+      }
+    }
+      // , {
+      //   headers: {
+      //     conversationId: `${data.conversationId}`,
+      //     accessToken: `${localStorage.getItem('accessToken')}`,
+      //   },
+      // }
+    );
   }
 
   getTopics(data: { id: string; conversationId: string }) {
-    return this.http.get(`${this.URL}/gettopics/${data.id}`, {
-      headers: {
-        conversationId: `${data.conversationId}`,
-        accessToken: `${localStorage.getItem('accessToken')}`,
-      },
-    });
+    return this.http.get(`${this.URL}/topics/${data.id}`, {
+      params: {
+        accessToken: `${localStorage.getItem('accessToken')}`
+      }
+    }
+      // , {
+      //   headers: {
+      //     conversationId: `${data.conversationId}`,
+      //     accessToken: `${localStorage.getItem('accessToken')}`,
+      //   },
+      // }
+    );
   }
 
   getAnalytics(data: { id: string; conversationId: string }) {
-    return this.http.get(`${this.URL}/getanalytics/${data.id}`, {
-      headers: {
-        conversationId: `${data.conversationId}`,
-        accessToken: `${localStorage.getItem('accessToken')}`,
-      },
-    });
+    return this.http.get(`${this.URL}/analytics/${data.id}`, {
+      params: {
+        accessToken: `${localStorage.getItem('accessToken')}`
+      }
+    }
+      // , {
+      //   headers: {
+      //     conversationId: `${data.conversationId}`,
+      //     accessToken: `${localStorage.getItem('accessToken')}`,
+      //   },
+      // }
+    );
   }
 }

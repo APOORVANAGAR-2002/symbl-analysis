@@ -1,6 +1,32 @@
 html,body{
   overflow-x: hidden!important;
-
+}
+.navbar{
+  background-color: white;
+}
+.navbar-items{
+  display: flex;
+  justify-content: space-between;
+  font-size: 1rem;
+}
+.navbar-items li{
+  list-style: none;
+  margin-left: 10px;
+}
+.navbar-items li a{
+  text-decoration: none;
+  margin-left: 10px;
+  color: black;
+}
+.navbar-items li a:hover{
+  text-decoration: underline;
+}
+.navbar button{
+  background-color: black;
+  color: white;
+  border-radius: 1rem;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 .example-spacer {
   flex: 1 1 auto;

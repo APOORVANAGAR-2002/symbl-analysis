@@ -2,12 +2,15 @@ html,
 body {
   height: 100%;
 }
-body {
+body,td,tr {
   margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-family: 'Open Sans', sans-serif;
   min-height: 100vh;
   background: #e2e2e25c;
 }
+fieldset, img {border:0}
+
+ol, ul, li {list-style:none}
 .app-header {
   justify-content: space-between;
   position: fixed;
@@ -22,11 +25,15 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #e2e2e25c;
+  background-color: #f8f8f8;
 }
 .positronx {
   text-decoration: none;
   color: #ffffff;
+}
+.card-content{
+  display: flex;
+  width: 100%;
 }
 .box {
   position: relative;
@@ -41,7 +48,7 @@ body {
   -webkit-transform: scale(1);
   -ms-transform: scale(1);
   z-index: 5;
-  max-width: 400px;
+  max-width: 50%;
 }
 .box.back {
   transform: scale(.95);
@@ -65,14 +72,29 @@ body {
   -ms-transform: scale(.95);
   z-index: -1;
 }
-.login-wrapper .example-form {
-  min-width: 100%;
-  max-width: 300px;
+.login-wrapper .image-container{
+  width: 50%;
+}
+.login-wrapper .image-container img{
   width: 100%;
+  object-fit: cover;
+}
+.login-wrapper .example-form {
+  min-width: 50%;
+  max-width: 50%;
+  width: 50%;
 }
 .login-wrapper .example-full-width,
 .login-wrapper .btn-block {
   width: 100%;
+}
+.login-wrapper .example-full-width tr td .firstname input{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 20px;
 }
 .login-wrapper mat-card-header {
   text-align: center;
@@ -81,7 +103,7 @@ body {
   font-weight: 700;
 }
 .login-wrapper mat-card-header mat-card-title {
-  font-size: 30px;
+  font-size: 35px;
   margin: 0;
 }
 .login-wrapper .mat-card {
@@ -95,3 +117,11 @@ body {
 .login-wrapper .mat-form-field-appearance-legacy .mat-form-field-infix {
   padding: 0.8375em 0;
 }
+.mat-title{
+  font-weight:500;
+  font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  text-align: left;
+}
+form{
+  margin: 0 30px;
+} 

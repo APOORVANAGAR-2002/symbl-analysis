@@ -47,13 +47,15 @@ export class VideoComponent implements OnInit {
   ngOnInit(): void {
     console.log('Form', this.form);
     this.videoData.id = this.route.snapshot.paramMap.get('id')!;
+    this.id = this.route.snapshot.paramMap.get('id')!;
+    this.filename = this.route.snapshot.paramMap.get('filename')!;
+    this.getUrl();
   }
 
   getUrl() {
-    this.filename = this.route.snapshot.paramMap.get('filename')!;
-    this.id = this.route.snapshot.paramMap.get('id')!;
-    console.log(this.id, this.filename);
-    this.backendService.getPublicURL(this.filename).subscribe((res) => {
+    this.backendService.getPublicURL(this.id).subscribe((res) => {
+      console.log(res);
+      
       var url = JSON.parse(JSON.stringify(res));
       if (url.data) {
         this.videoData.url = url.data[0].public_url;
@@ -65,10 +67,10 @@ export class VideoComponent implements OnInit {
   }
 
   processVideo() {
-    if (this.videoData.url.length === 0 || !this.videoData.url) {
-      this.toastr.error('Generate a url first');
-    } else {
-      console.log('Video data', this.videoData);
+    // if (this.videoData.url.length === 0 || !this.videoData.url) {
+    //   this.toastr.error('Generate a url first');
+    // } else {
+    //   console.log('Video data', this.videoData);
       this.backendService.processVideo(this.videoData).subscribe((res) => {
         let resp = JSON.parse(JSON.stringify(res));
         console.log('Process', resp);
@@ -101,7 +103,7 @@ export class VideoComponent implements OnInit {
         //   //   this.videoUrl = url.data[0].video_url;
         //   // });
       });
-    }
+    // }
     // alert('File submitted successfully');
     // this.toastr.info('Processing the video... Please wait!');
   }
@@ -112,7 +114,7 @@ export class VideoComponent implements OnInit {
       .subscribe((res) => {
         console.log('Check status response: ', res);
         var resp = JSON.parse(JSON.stringify(res));
-        if (resp.response.status === 'completed') {
+        if (resp.status === 'completed') {
           this.toastr.success('Job status: completed');
           this.getSummary();
           this.getAnalytics();
@@ -144,7 +146,7 @@ export class VideoComponent implements OnInit {
       .subscribe((res) => {
         let resp = JSON.parse(JSON.stringify(res));
         console.log('Summary resp:', resp);
-        this.summary = resp.response.summary[0].text;
+        this.summary = resp.summary[0].text;
         console.log('Summary', this.summary);
       });
     // this.symblService
@@ -163,7 +165,7 @@ export class VideoComponent implements OnInit {
       .subscribe((res) => {
         var resp = JSON.parse(JSON.stringify(res));
         console.log('Topics resp:', resp);
-        this.topics = resp.response.topics;
+        this.topics = resp.topics;
         console.log("Topics",this.topics);
         
       });
@@ -175,7 +177,7 @@ export class VideoComponent implements OnInit {
       .subscribe((res) => {
         console.log('Messages resp:', res);
         var resp = JSON.parse(JSON.stringify(res));
-        this.messages = resp.response.messages;
+        this.messages = resp.messages;
         console.log('Get Messages', this.messages);
         
       });
@@ -195,7 +197,7 @@ export class VideoComponent implements OnInit {
       .subscribe((res) => {
         var resp = JSON.parse(JSON.stringify(res));
         console.log('Questions resp:', resp);
-        this.questions = resp.response.messages;
+        this.questions = resp.questions;
         console.log("Questions", this.questions);
       });
     // this.symblService
@@ -215,8 +217,8 @@ export class VideoComponent implements OnInit {
         console.log('Analytics resp:', res);
         var resp = JSON.parse(JSON.stringify(res));
         // this.summary = resp.summary[0].text;
-        this.members = resp.response.members;
-        this.metrics = resp.response.metrics;
+        this.members = resp.members;
+        this.metrics = resp.metrics;
         console.log("Analytics", this.members, this.metrics);
       });
 
@@ -254,64 +256,64 @@ export class VideoComponent implements OnInit {
   //   }
   // }
 
-  getMessage() {
-    this.backendService.getMessages(this.file.name).subscribe((res) => {
-      console.log(res);
-      var resp = JSON.parse(JSON.stringify(res));
-      this.messages = resp.messages;
-      console.log('Get Messages', this.messages);
-    });
-  }
-
-  start() {
-    this.symblService.processAudio();
-    // console.log(name);
-  }
-  // postFileTo() {
-  //   this.backendService.postFile();
+  // getMessage() {
+  //   this.backendService.getMessages(this.file.name).subscribe((res) => {
+  //     console.log(res);
+  //     var resp = JSON.parse(JSON.stringify(res));
+  //     this.messages = resp.messages;
+  //     console.log('Get Messages', this.messages);
+  //   });
   // }
 
-  post() {
-    // this.symblService.submitVideo();
-    // this.findStatus();
-    const formData = new FormData();
-    formData.append('file', this.video, this.video.name);
-    console.log(formData);
+  // start() {
+  //   this.symblService.processAudio();
+  //   // console.log(name);
+  // }
+  // // postFileTo() {
+  // //   this.backendService.postFile();
+  // // }
 
-    this.backendService.submitVideo(formData);
-  }
+  // post() {
+  //   // this.symblService.submitVideo();
+  //   // this.findStatus();
+  //   const formData = new FormData();
+  //   formData.append('file', this.video, this.video.name);
+  //   console.log(formData);
 
-  onFileSelected(event: any) {
-    const file: File = event.target.files[0];
-    if (file) {
-      this.fileName = file.name;
-      console.log(file);
-      this.video = file;
+  //   this.backendService.submitVideo(formData);
+  // }
 
-      // this.backendService.attachVideo(file);
-    }
-  }
+  // onFileSelected(event: any) {
+  //   const file: File = event.target.files[0];
+  //   if (file) {
+  //     this.fileName = file.name;
+  //     console.log(file);
+  //     this.video = file;
 
-  findStatus() {
-    this.symblService
-      .checkStatus()
-      .then((response) => response.json())
-      .then((response) => {
-        console.log(response);
-        if (response.status === 'completed') {
-          console.log(response.status);
-          // this.getSummary();
-          // alert('Video processed successfully');
-          // this.getTopics();
-          // this.getMessages();
-          // this.getAnalytics();
-          // this.getQuestions();
-        } else {
-          alert('The video is still being processed...');
-        }
-      })
-      .catch((err) => console.error(err));
-  }
+  //     // this.backendService.attachVideo(file);
+  //   }
+  // }
+
+  // findStatus() {
+  //   this.symblService
+  //     .checkStatus()
+  //     .then((response) => response.json())
+  //     .then((response) => {
+  //       console.log(response);
+  //       if (response.status === 'completed') {
+  //         console.log(response.status);
+  //         // this.getSummary();
+  //         // alert('Video processed successfully');
+  //         // this.getTopics();
+  //         // this.getMessages();
+  //         // this.getAnalytics();
+  //         // this.getQuestions();
+  //       } else {
+  //         alert('The video is still being processed...');
+  //       }
+  //     })
+  //     .catch((err) => console.error(err));
+  // }
 
   // getAnalytics() {
   //   const url = this.symblService.getAnalytics();

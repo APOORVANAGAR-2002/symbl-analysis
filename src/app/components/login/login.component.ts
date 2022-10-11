@@ -27,13 +27,13 @@ export class LoginComponent implements OnInit {
     this.authService.signIn(this.userData).subscribe((res) => {
       var response = JSON.parse(JSON.stringify(res));
       console.log(response);
-      if (response.error === null) {
-        localStorage.setItem('accessToken', response.symbl.accessToken);
-        console.log("Access Token", response.symbl.accessToken);
+      if (response) {
+        // localStorage.setItem('accessToken', response.symbl.accessToken);
+        // console.log("Access Token", response.symbl.accessToken);
         this.toastr.success('Logged in successfully!');
         this.router.navigate(['home']);
       } else {
-        this.toastr.error(response.error.message);
+        this.toastr.error("An error occurred!");
       }
     });
   }

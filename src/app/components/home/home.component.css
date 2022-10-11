@@ -1,59 +1,136 @@
-.container{
+.container {
+  display: flex;
+  color: black;
+  padding: 20px;
+  overflow-x: hidden !important;
+  font-family:Arial, Helvetica, sans-serif ;
+}
+
+.landing-meta {
+  padding: 20px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  height: 100vh;
-  background-color: indigo;
-  background-size: cover;
-  overflow-x: hidden;
+  justify-content: center;
+  text-align: left;
+  margin-top: 20px;
+  width: 50%;
 }
-.card-container{
+
+.landing-meta h1 {
+  color: black;
+  font-size: 4rem;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.landing-meta-subtitle {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 2rem;
+  font-weight: 400;
+}
+
+.landing-image {
+  margin-top: 20px;
+  width: 50%;
+}
+
+.landing-image img {
+  object-fit: cover;
+}
+
+.upload-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  margin-left: 20px;
+}
+.upload-container button{
+  background-color: black;
+  color: white;
+  border-radius: 5px;
+  margin-left: 15px;
+  margin-right: 15px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.disabled{
+  opacity: 0.6;
+}
+.card-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   padding: 10px;
   margin: 10px;
+  width: 50%;
+  color: black;
+  box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+  border-radius: 1.5rem;
+  background-color: #dde2f1;
 }
+.form-container {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 40px;
+  margin: 20px 20px;
+  border-radius: 1.5rem;
+  border: 3px dotted #d9dbeb;
+  justify-content: center;
+  align-items: center;
+  color: black;
+  background-color: #f1f3ff;
+  width: 80%;
+}
+
 input[type="file"] {
   display: none;
 }
-.form-container{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: white;
 
-}
 .custom-file-upload {
-  border: 1px solid #ccc;
   display: flex;
+  flex-direction: column;
   align-items: center;
   padding: 6px 12px;
   cursor: pointer;
   margin: 10px;
+  color: #9b9eac;
+}
+
+.file-view{
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 10px;
+  width: 85%;
+  display: flex;
+  align-items: center;
+  color: #a2a0a7;
 }
 
 
-h1, p{
+h1,
+p {
   color: white;
   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
-.box-container{
+
+.box-container {
   display: flex;
 }
-.btn{
+
+.btn {
   display: flex;
   margin: 10px;
   font-size: large;
   padding: 10px;
 }
-.file-input {
-    display: none;
-  }
 
-.card-container{
+.file-input {
+  display: none;
+}
+
+.card-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -61,37 +138,45 @@ h1, p{
   padding: 10px;
   margin: 10px;
 }
-.data-container{
-    display: flex;
-    width: 100vw;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+
+.data-container {
+  display: flex;
+  width: 100vw;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
-.button-container button{
+
+.button-container button {
   margin: 10px
 }
+
 .example-card {
   max-width: 400px;
   margin-top: 10px;
   margin: 10px;
 }
-.example-card{
+
+.example-card {
   min-width: 300px;
 }
-.summary{
+
+.summary {
   min-width: 1000px;
   padding: 40px;
 }
-.analytics-container{
-    display: flex;
-    margin: 10px;
+
+.analytics-container {
+  display: flex;
+  margin: 10px;
 }
-.chip-list{
+
+.chip-list {
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.chip-list mat-chip-list{
+
+.chip-list mat-chip-list {
   margin: 4px;
 }

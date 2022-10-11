@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 export class AuthService {
   currentUser: BehaviorSubject<boolean | any> = new BehaviorSubject(null);
 
-  baseUrl = 'http://localhost:8080';
+  baseUrl = 'http://127.0.0.1:8000';
   options = {
     method: 'POST',
     headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
@@ -22,28 +22,28 @@ export class AuthService {
   };
 
   constructor(private http: HttpClient, private router: Router) {
-    http.get(`${this.baseUrl}/getUser`).subscribe((res) => {
-      const resp = JSON.parse(JSON.stringify(res));
-      console.log(resp);
-      if (resp.user) {
-        this.currentUser.next(resp.user);
-      } else {
-        this.currentUser.next(false);
-      }
-    });
+    // http.get(`${this.baseUrl}/getUser`).subscribe((res) => {
+    //   const resp = JSON.parse(JSON.stringify(res));
+    //   console.log(resp);
+    //   if (resp.user) {
+    //     this.currentUser.next(resp.user);
+    //   } else {
+    //     this.currentUser.next(false);
+    //   }
+    // });
 
-    http.get(`${this.baseUrl}/onAuthStateChange`).subscribe((res) => {
-      const response = JSON.parse(JSON.stringify(res))
-      console.log(response);
-      console.log("Auth changed", response.event);
-      console.log("Auth changed session", response.session);
-      if (response.session) {
-        this.currentUser.next(response.session.user)
-      } else {
-        this.currentUser.next(false);
-      }
+    // http.get(`${this.baseUrl}/onAuthStateChange`).subscribe((res) => {
+    //   const response = JSON.parse(JSON.stringify(res))
+    //   console.log(response);
+    //   console.log("Auth changed", response.event);
+    //   console.log("Auth changed session", response.session);
+    //   if (response.session) {
+    //     this.currentUser.next(response.session.user)
+    //   } else {
+    //     this.currentUser.next(false);
+    //   }
       
-    });
+    // });
   }
 
   signUp(userData: {

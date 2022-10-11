@@ -29,6 +29,9 @@ input[type="file"] {
 .url-container{
   min-width: 80vw;
 }
+.input{
+  margin-left: 10px;
+}
 
 .card-container{
   display: flex;

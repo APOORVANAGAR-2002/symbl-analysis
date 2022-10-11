@@ -19,7 +19,6 @@ export class HomeComponent implements OnInit {
   members: any = [];
   metrics: any = [];
   questions: any = [];
-  status: string = 'in_progress';
 
   constructor(
     private symblService: SymblService,
@@ -43,15 +42,16 @@ export class HomeComponent implements OnInit {
       const formData = new FormData();
       formData.append('file', this.file);
       console.log(formData);
+      this.getToken();
       this.backendService.submitVideo(formData).subscribe((res) => {
         console.log('Frontend upload respones: ', res);
         let response = JSON.parse(JSON.stringify(res));
-        if (response.error === null) {
+        if (response.data[0]) {
           this.videoId = response.data[0].id;
           this.toastr.success('Video uploaded successfully!');
           this.router.navigate(['video', this.file.name, this.videoId]);          
         } else {
-          this.toastr.error(response.error.message);
+          this.toastr.error("An error occurred!");
         }
       });
       // this.getUrl();
@@ -112,6 +112,14 @@ export class HomeComponent implements OnInit {
         }
       })
       .catch((err) => console.error(err));
+  }
+
+  getToken(){
+    this.backendService.getAccessToken().subscribe((res)=>{
+      console.log(res);
+      localStorage.setItem('accessToken', JSON.stringify(res));
+      console.log("Access Token", localStorage.getItem('accessToken'));
+    })
   }
 
   // getAnalytics() {
